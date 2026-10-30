@@ -2042,19 +2042,7 @@ TargetState* layer::Scene::get_motion_vectors_state() {
 }
 
 ID3D12Resource* layer::Scene::get_depth_stencil_d3d12() {
-    const auto tex = this->get_reflection_property<::sdk::renderer::Texture*>("DepthStencilTex");
-
-    if (tex == nullptr) {
-        return nullptr;
-    }
-
-    const auto internal_resource = tex->get_d3d12_resource_container();
-
-    if (internal_resource == nullptr) {
-        return nullptr;
-    }
-
-    return internal_resource->get_native_resource();
+    return get_target_state_resource_d3d12("DepthTarget");
 }
 }
 }
